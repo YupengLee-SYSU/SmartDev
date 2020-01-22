@@ -1,0 +1,62 @@
+from rest_framework.viewsets import ModelViewSet
+
+from SmartDevApp.enums.BaseEnums import resultCode, resultMsg
+from SmartDevApp.models import StockBasic
+from SmartDevApp.serializers import StockBasicSerializer
+from SmartDevApp.dto.response.BaseResponse import BaseResponse as commonResponse
+from SmartDevApp.dto.request.BizData import BizData
+import tushare as ts
+import SmartDevApp.util.commonUtils as utils
+from SmartDevApp.service.OutService import OutService
+
+class ModelViewSetCore(ModelViewSet):
+    queryset = StockBasic.objects.all()
+    serializer_class = StockBasicSerializer
+
+    def queryByCondition(self, bizContent):
+        bizData = BizData()
+        bizData.setDict(bizContent)
+        print("queryset:"+str(bizData.queryCondition))
+        print("selectedField:"+bizData.selectedField)
+
+        self.queryset = StockBasic.objects.filter(ts_code=bizData.queryCondition.get("ts_code"))
+
+        queryset = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        respData = serializer.data
+
+        response = commonResponse()
+        response.resultCode = resultCode.SUCCESS
+        response.resultMsg = resultMsg.SUCCESS
+        response.bizContent = str(respData)
+        return response
+
+    def updateByCondition(self, bizContent):
+        data = None
+        fields = self._getModelFields()
+        if bizContent is None:
+            # update all the stock base infomation
+            field_str = ""
+            for field in fields:
+                field_str = field_str + field + ","
+
+            outService = OutService()
+            data = outService.getStockBasicData(field_str)
+        else:
+            pass
+        return data[0]
+
+    def _getModelFields(self):
+        model = self._getModel()
+        field_data = model._meta.fields
+        return field_data
+
+    def _getModel(self):
+        self.model = StockBasic
+        return self.model
