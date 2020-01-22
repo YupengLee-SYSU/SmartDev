@@ -1,0 +1,78 @@
+create table `daily_line` (
+	`id`	char(32)	COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '自增主键',
+	`ts_code`	char(32)	COMMENT '股票代码',
+	`trade_date`	varchar(32)	COMMENT '交易日期',
+	`open`	varchar(32)	COMMENT '开盘价',
+	`high`	varchar(32)	COMMENT '最高价',
+	`low`	varchar(32)	COMMENT '最低价',
+	`close`	varchar(32)	COMMENT '收盘价',
+	`pre_close`	varchar(32)	COMMENT '昨收价',
+	`change`	varchar(32)	COMMENT '涨跌额',
+	`pct_chg`	varchar(32)	COMMENT '涨跌幅',
+	`vol`	varchar(32)	COMMENT '成交量 （手）',
+	`amount`	varchar(32)	COMMENT '成交额 （千元）',
+	`create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	PRIMARY KEY (`id`,`ts_code`),
+	UNIQUE KEY `id_UNIQUE` (`id`,`ts_code`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+PARTITION BY KEY(ts_code)
+PARTITIONS 997;
+
+CREATE TABLE `stock_basic` (
+  `index` int(11) NOT NULL AUTO_INCREMENT,
+  `ts_code` varchar(45) DEFAULT NULL,
+  `symbol` varchar(45) DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `area` varchar(45) DEFAULT NULL,
+  `industry` varchar(45) DEFAUcreate table `daily_line` (
+	`id`	char(32)	COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '自增主键',
+	`ts_code`	char(32)	COMMENT '股票代码',
+	`trade_date`	varchar(32)	COMMENT '交易日期',
+	`open`	varchar(32)	COMMENT '开盘价',
+	`high`	varchar(32)	COMMENT '最高价',
+	`low`	varchar(32)	COMMENT '最低价',
+	`close`	varchar(32)	COMMENT '收盘价',
+	`pre_close`	varchar(32)	COMMENT '昨收价',
+	`change`	varchar(32)	COMMENT '涨跌额',
+	`pct_chg`	varchar(32)	COMMENT '涨跌幅',
+	`vol`	varchar(32)	COMMENT '成交量 （手）',
+	`amount`	varchar(32)	COMMENT '成交额 （千元）',
+	`create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	PRIMARY KEY (`id`,`ts_code`),
+	UNIQUE KEY `id_UNIQUE` (`id`,`ts_code`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+PARTITION BY KEY(ts_code)
+PARTITIONS 997;
+
+CREATE TABLE `stock_basic` (
+  `index` int(11) NOT NULL AUTO_INCREMENT,
+  `ts_code` varchar(45) DEFAULT NULL,
+  `symbol` varchar(45) DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `area` varchar(45) DEFAULT NULL,
+  `industry` varchar(45) DEFAULT NULL,
+  `fullname` varchar(45) DEFAULT NULL,
+  `enname` varchar(45) DEFAULT NULL,
+  `market` varchar(45) DEFAULT NULL,
+  `exchange` varchar(45) DEFAULT NULL,
+  `curr_type` varchar(45) DEFAULT NULL,
+  `list_status` varchar(45) DEFAULT NULL,
+  `list_date` varchar(45) DEFAULT NULL,
+  `delist_date` varchar(45) DEFAULT NULL,
+  `is_hs` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`index`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+LT NULL,
+  `fullname` varchar(45) DEFAULT NULL,
+  `enname` varchar(45) DEFAULT NULL,
+  `market` varchar(45) DEFAULT NULL,
+  `exchange` varchar(45) DEFAULT NULL,
+  `curr_type` varchar(45) DEFAULT NULL,
+  `list_status` varchar(45) DEFAULT NULL,
+  `list_date` varchar(45) DEFAULT NULL,
+  `delist_date` varchar(45) DEFAULT NULL,
+  `is_hs` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`index`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
