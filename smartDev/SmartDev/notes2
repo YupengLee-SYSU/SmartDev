@@ -1,0 +1,13 @@
+import SmartDevApp.util.commonUtils as commonUtils
+import tushare as ts
+
+class OutService:
+    def __init__(self):
+        self.token = commonUtils.getToken()
+        self.ts = ts
+
+    def getStockBasicData(self, fields):
+        self.ts.set_token(self.token)
+        pro = self.ts.pro_api()
+        data = pro.query('stock_basic', exchange='', list_status='L', fields=fields)
+        return data
