@@ -5,13 +5,14 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.viewsets import ViewSetMixin
 from .models import StockBasic
 from .serializers import StockBasicSerializer
-from .service import StockBasicService
+# from .service import StockBasicService
 from django.http import HttpRequest
 from django.http import HttpResponse
 import tushare as ts
 from django.views.generic import View
 import json
-from SmartDevCore.ModelCore import ModelViewSetCore
+from SmartDevCore.ModelCore import StockBasicViewSetCore
+from SmartDevCore.ModelCore import DailyLineViewSetCore
 # Create your views here.
 
 def queryOutDataView(request):
@@ -24,7 +25,7 @@ def queryOutDataView(request):
     print(str(data.head(2)))
     return HttpResponse(str(data.head(2)))
 
-class StockBasicViewTest(ModelViewSetCore):
+class StockBasicViewTest(StockBasicViewSetCore):
     def Main(self, request):
         requestContent = request.body
         request_json = json.loads(requestContent)
@@ -34,7 +35,15 @@ class StockBasicViewTest(ModelViewSetCore):
         baseResponse = controller(baseRequest.bizData)
         return HttpResponse(json.dumps(baseResponse.bizContent, default=lambda o: o.__dict__, sort_keys=True, indent=4))
 
-
+class DailyLineViewTest(DailyLineViewSetCore):
+    def Main(self, request):
+        requestContent = request.body
+        request_json = json.loads(requestContent)
+        baseRequest = commonRequest()
+        baseRequest.setDict(request_json)
+        controller = getattr(self, baseRequest.method)
+        baseResponse = controller(baseRequest.bizData)
+        return HttpResponse(json.dumps(baseResponse.bizContent, default=lambda o: o.__dict__, sort_keys=True, indent=4))
 
 
 

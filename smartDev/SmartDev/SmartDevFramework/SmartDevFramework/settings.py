@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django_crontab',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -123,3 +124,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CRONJOBS = [
+    # ('*/1 * * * *', 'SmartDevBatch.batchJobDispatch.batchDispatcher', '>>/root/SmartDev/logs/cron.log')
+    ('*/1 * * * *', 'SmartDevApp.batchJobDispatch.batchDispatcher', '>>/root/SmartDev/logs/cron.log')
+]
+

@@ -20,5 +20,6 @@ from SmartDevApp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', views.queryOutDataView),
-    path('stocktest/', views.StockBasicViewTest.as_view({"post": "Main"}))
+    path('stocktest/', views.StockBasicViewTest.as_view({"post": "Main"})),
+    path('dailylinetest/', views.DailyLineViewTest.as_view({"post": "Main"}))
 ]

@@ -5,15 +5,15 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.viewsets import ViewSetMixin
 from .models import StockBasic
 from .serializers import StockBasicSerializer
-from .service import StockBasicService
+# from .service import StockBasicService
 from django.http import HttpRequest
 from django.http import HttpResponse
 import tushare as ts
 from django.views.generic import View
 import json
-from SmartDevCore.ModelCore import ModelViewSetCore
+from SmartDevCore.ModelCore import StockBasicViewSetCore
 
-class StockBasicViewTest(ModelViewSetCore):
+class StockBasicViewTest(StockBasicViewSetCore):
     def Main(self, request):
         requestContent = request.body
         request_json = json.loads(requestContent)
